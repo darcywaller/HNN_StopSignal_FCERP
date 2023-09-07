@@ -1,5 +1,5 @@
-sim_prefix: SUCC_onespikeP3_optwithbound
-expmt_groups: {SUCC_onespikeP3_optwithbound}
+sim_prefix: FSonespikemodel
+expmt_groups: {FSonespikemodel}
 tstop: 500
 dt: 0.025
 celsius: 37.0
@@ -225,3 +225,5 @@ Itonic_T_L5Pyr_soma: -1.0
 Itonic_A_L5Basket: 0.0
 Itonic_t0_L5Basket: 0.0
 Itonic_T_L5Basket: -1.0
+
+Run_Date: 2023-09-06
