@@ -76,8 +76,7 @@ The ‘HNN_sims’ directory contains HNN output associated with each of the par
 *	Each subdirectory corresponds to a parameter file in 'HNN_Parameters' and contains the following .txt files:  
     <sub> **dpl**	contains the averaged dipole *(column 1: time steps in ms, column 2: aggregate dipole, column 3: Layer II/III dipole, column 4: Layer V dipole)*   
      **dpl_0 - dpl_49**	contains the dipole associated with each trial *(here, 50 trials, column structure as in dpl)*   
-     **rawdpl**	contains the raw (unnormalized, unscaled, unsmoothed) averaged dipole *(column structure as in dpl)*   
-     **rawdpl_0 - rawdpl_49**	contains the raw dipole associated with each trial *(here, 50 trials, column structure as in dpl)*        </sub> 
+     **spk_0**	contains the spike timing of incoming proximal and distal inputs and outcoming spikes from model basket and pyramidal cells*        </sub> 
 
 ***
 
