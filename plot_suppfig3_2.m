@@ -1,6 +1,6 @@
 %% Plot Model & Data
 % Plot models and data associated with successful stop trials
-% (Manuscript Figure 3A)
+% (Manuscript Supplementary Figure 3-2)
 clear;
 figure('Color','w'); % specify size!
 width=600;
@@ -12,14 +12,14 @@ set(gcf,'position',[10, 10 , width, height])
 dip_colors = {[136 204 238], [51 34 136]; [76 145 65], [225 193 110]};
 outspike_colors = {[152 152 51], [167 68 150], [204 102 119], [136 34 85]};
 inspike_colors = {[170 0 0], [0 128 0]};
-dip_ylims = [-4 9];
+dip_ylims = [-12 3];
 spike_ylims = [-10 280];
 hist_ylims = [0 50];
 xlims = [0 500];
 sim_trials = 50;
 
 % data
-trial_spikes = load(strcat(pwd,'/HNN_sims/SSmodel/',...
+trial_spikes = load(strcat(pwd,'/HNN_sims/supp figs/SUCC_distalfirst_opt2/',...
     'spk_0.txt'));
 % from param.txt, identities of drives and spikes - these can be found in
 % the first 8 lines of the param .txt file
@@ -27,19 +27,19 @@ L2_pyr = [  35,  134];
 L2_basket = [   0,   34];
 L5_pyr = [ 170,  269];
 L5_basket = [ 135,  169];
-prox1 = [ 540,  809];
-dist = [ 270,  539];
-prox2 = [ 810, 1079];
+prox = [1080, 1349];
+dist1 = [ 270,  539];
+dist2 = [ 540,  809];
 
 % 1) Plot histogram of incoming prox, dist drive spikes
 inspikes = trial_spikes(trial_spikes(:,2) > L5_pyr(2),:);
-proxin1 = inspikes(inspikes(:,2) >= prox1(1) & inspikes(:,2) <= prox1(2),1);
-proxin2 = inspikes(inspikes(:,2) >= prox2(1) & inspikes(:,2) <= prox2(2),1);
-distin = inspikes(inspikes(:,2) >= dist(1) & inspikes(:,2) <= dist(2),1);
+proxin = inspikes(inspikes(:,2) >= prox(1) & inspikes(:,2) <= prox(2),1);
+distin1 = inspikes(inspikes(:,2) >= dist1(1) & inspikes(:,2) <= dist1(2),1);
+distin2 = inspikes(inspikes(:,2) >= dist2(1) & inspikes(:,2) <= dist2(2),1);
 edges = linspace(0,500);
 subplot(3,1,1);
-histogram(distin,edges,'EdgeColor','none','FaceColor',inspike_colors{2}/255,'FaceAlpha',1); hold on;
-histogram([proxin1; proxin2],edges,'EdgeColor','none','FaceColor',inspike_colors{1}/255,'FaceAlpha',1); 
+histogram(proxin,edges,'EdgeColor','none','FaceColor',inspike_colors{1}/255,'FaceAlpha',1); hold on;
+histogram([distin1; distin2],edges,'EdgeColor','none','FaceColor',inspike_colors{2}/255,'FaceAlpha',1); 
 ylim(hist_ylims); xlim(xlims); set(gca,'XTick',[])
 hold off; box off;
 pos = get(gca, 'Position');
@@ -72,7 +72,7 @@ subplot(3,1,3);
 for trial = 1:sim_trials
     
     % load simulation
-    trial_simulation = load(strcat(pwd,'/HNN_sims/SSmodel/',...
+    trial_simulation = load(strcat(pwd,'/HNN_sims/supp figs/SUCC_distalfirst_opt2/',...
         'dpl_',num2str(trial-1),'.txt'));
     simulation_time = trial_simulation(:,1); %time
     trial_simulation_agg = trial_simulation(:,2);%aggregate dipole
@@ -87,12 +87,12 @@ end
 
 % plot average
 % load ERP
-data = load(strcat('SUCCSTOP.txt'));
+data = load(strcat('SUCCSTOP_neg.txt'));
 data_time = data(:,1); % time
 data = data(:,2); % voltage
 
 % load simulation
-simulation = load(strcat(pwd,'/HNN_sims/SSmodel/dpl.txt'));
+simulation = load(strcat(pwd,'/HNN_sims/supp figs/SUCC_distalfirst_opt2/dpl.txt'));
 simulation_time = simulation(:,1); % time
 simulation_agg = simulation(:,2); % aggregate dipole
 simulation_L2 = simulation(:,3); % layerII/III dipole
@@ -112,7 +112,7 @@ ylim(dip_ylims);
 xlim(xlims); xticks([100 200 300 400 500]);
 
 % plot layer-specific dipoles in inset
-axes('Position',[.58 .13 .18 .1]);
+axes('Position',[.3 .13 .18 .1]);
 box on;
 
 l2(1) = plot(simulation_time, simulation_L2, 'Color',...
