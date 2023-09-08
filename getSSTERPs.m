@@ -490,16 +490,21 @@ disp(['On average, single-sub SS P3 peaks at ' num2str(mean((SS_PEAK-50)*2)) ' a
 
 % N2 amp, peak
 for is = 1:length(fname)
-N2_SS_AMP(is) = min(gERPsFC(is,125:175)); % look for neg peak b/t 150-250ms
+[N2_SS_AMP(is),N2_SS_PEAK(is)] = min(gERPsFC(is,125:175)); % look for neg peak b/t 150-250ms
 end
 for is = 1:length(fname)
-N2_FS_AMP(is) = min(gERPfFC(is,125:175)); % look for neg peak b/t 150-250ms
+[N2_FS_AMP(is),N2_FS_PEAK(is)] = min(gERPfFC(is,125:175)); % look for neg peak b/t 150-250ms
 end
 [~,N2_amp_p,~,N2_amp_stats] = ttest(N2_SS_AMP,N2_FS_AMP);
 n2_amp_effect = effectsize(N2_SS_AMP,N2_FS_AMP);
 disp(['N2 amplitude test: t(' num2str(N2_amp_stats.df) ') = ' ...
     num2str(N2_amp_stats.tstat) ', p = ' num2str(N2_amp_p)...
     ', d = ' num2str(n2_amp_effect) '.']);
+[~,N2_peak_p,~,N2_peak_stats] = ttest((N2_SS_PEAK+125-50)*2,(N2_FS_PEAK+125-50)*2);
+n2_peak_effect = effectsize((N2_SS_PEAK+125-50)*2,(N2_FS_PEAK+125-50)*2);
+disp(['N2 peak latency test: t(' num2str(N2_peak_stats.df) ') = ' ...
+    num2str(N2_peak_stats.tstat) ', p = ' num2str(N2_peak_p)...
+    ', d = ' num2str(n2_peak_effect) '.']);
 
 % P2 amp, peak
 for is = 1:length(fname)
