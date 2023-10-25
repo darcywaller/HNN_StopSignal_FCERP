@@ -154,7 +154,7 @@ end
 
 % plot average
 % load ERP
-data = load(strcat('SUCCSTOP.txt'));
+data = load(strcat('FAILSTOP.txt'));
 data_time = data(:,1); % time
 data = data(:,2); % voltage
 
