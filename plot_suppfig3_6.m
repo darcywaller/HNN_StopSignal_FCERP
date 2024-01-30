@@ -19,7 +19,7 @@ xlims = [0 500];
 sim_trials = 50;
 
 % data
-trial_spikes = load(strcat(pwd,'/HNN_sims/SSmodel/',...
+trial_spikes = load(strcat(pwd,'/HNN_sims/supp figs/SUCC_unsmoothed/',...
     'spk_0.txt'));
 % from param.txt, identities of drives and spikes - these can be found in
 % the first 8 lines of the param .txt file
@@ -50,7 +50,7 @@ subplot(2,1,2);
 for trial = 1:sim_trials
     
     % load simulation
-    trial_simulation = load(strcat(pwd,'/HNN_sims/SSmodel/',...
+    trial_simulation = load(strcat(pwd,'/HNN_sims/supp figs/SUCC_unsmoothed/',...
         'dpl_',num2str(trial-1),'.txt'));
     simulation_time = trial_simulation(:,1); %time
     trial_simulation_agg = trial_simulation(:,2);%aggregate dipole
@@ -70,7 +70,7 @@ data_time = data(:,1); % time
 data = data(:,2); % voltage
 
 % load simulation
-simulation = load(strcat(pwd,'/HNN_sims/SSmodel/dpl.txt'));
+simulation = load(strcat(pwd,'/HNN_sims/supp figs/SUCC_unsmoothed/dpl.txt'));
 simulation_time = simulation(:,1); % time
 simulation_agg = simulation(:,2); % aggregate dipole
 simulation_L2 = simulation(:,3); % layerII/III dipole
@@ -90,7 +90,7 @@ ylim(dip_ylims);
 xlim(xlims); xticks([100 200 300 400 500]);
 hold off;
 
-%% Plot models and data associated with SS drives run with default network params
+%% Plot models and data associated with failed stop trials
 clear;
 figure('Color','w'); % specify size!
 width=600;
@@ -98,7 +98,7 @@ height=450;
 set(gcf,'position',[10, 10 , width, height])
 
 % figure settings
-dip_colors = {[136 204 238], [51 34 136]; [76 145 65], [225 193 110]};
+dip_colors = {[212 85 0], [232 170 128]; [76 145 65], [225 193 110]};
 outspike_colors = {[152 152 51], [167 68 150], [204 102 119], [136 34 85]};
 inspike_colors = {[170 0 0], [0 128 0]};
 dip_ylims = [-7 11];
@@ -108,7 +108,7 @@ xlims = [0 500];
 sim_trials = 50;
 
 % data
-trial_spikes = load(strcat(pwd,'/HNN_sims/supp figs/default_w_SSdrives/',...
+trial_spikes = load(strcat(pwd,'/HNN_sims/supp figs/FAIL_unsmoothed/',...
     'spk_0.txt'));
 % from param.txt, identities of drives and spikes - these can be found in
 % the first 8 lines of the param .txt file
@@ -139,7 +139,7 @@ subplot(2,1,2);
 for trial = 1:sim_trials
     
     % load simulation
-    trial_simulation = load(strcat(pwd,'/HNN_sims/supp figs/default_w_SSdrives/',...
+    trial_simulation = load(strcat(pwd,'/HNN_sims/supp figs/FAIL_unsmoothed/',...
         'dpl_',num2str(trial-1),'.txt'));
     simulation_time = trial_simulation(:,1); %time
     trial_simulation_agg = trial_simulation(:,2);%aggregate dipole
@@ -154,12 +154,12 @@ end
 
 % plot average
 % load ERP
-data = load(strcat('SUCCSTOP.txt'));
+data = load(strcat('FAILSTOP.txt'));
 data_time = data(:,1); % time
 data = data(:,2); % voltage
 
 % load simulation
-simulation = load(strcat(pwd,'/HNN_sims/supp figs/default_w_SSdrives/dpl.txt'));
+simulation = load(strcat(pwd,'/HNN_sims/supp figs/FAIL_unsmoothed/dpl.txt'));
 simulation_time = simulation(:,1); % time
 simulation_agg = simulation(:,2); % aggregate dipole
 simulation_L2 = simulation(:,3); % layerII/III dipole
@@ -167,9 +167,9 @@ simulation_L5 = simulation(:,4); % layerV dipole
 
 %plot data and aggregate dipoles
 l1(2) = plot(simulation_time, simulation_agg,'Color',...
-    dip_colors{1,1}./255,'Linewidth',3); hold on;
+    dip_colors{1,2}./255,'Linewidth',3); hold on;
 l1(1) = plot(data_time, data ,'Color',...
-    dip_colors{1,2}./255,'Linewidth',3); hold off; box off;
+    dip_colors{1,1}./255,'Linewidth',3); hold off; box off;
 pos = get(gca, 'Position');
 set(gca, 'Position',pos+[0 0 0 0.2])
 %legend(l1, 'Data','Model'); 
